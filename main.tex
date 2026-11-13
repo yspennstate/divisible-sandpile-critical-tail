@@ -1,0 +1,1031 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,noabbrev,capitalise]{cleveref}
+\renewcommand{\bfdefault}{m}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{Remark}{Remarks}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\ind}{\mathrm{1}}
+\newcommand{\dd}{\,\mathrm d}
+\DeclareMathOperator{\Var}{Var}
+\title{The divisible sandpile odometer at the critical lower tail}
+\author{Yitzchak Shmalo}
+\address{The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{}
+\subjclass[2020]{60K35, 60G50, 60E15}
+\keywords{Divisible sandpile, odometer, lower tail, Green function, positive association}
+\begin{document}
+\begin{abstract}
+We study the synchronous divisible sandpile on $\Z^d$, $d\ge5$, with
+independent centered scenery. If the scenery has an absolute exponential
+moment and its negative tail has logarithm of order $-t^{d/2}$, the expected
+odometer at time $n$ has order
+$(\log n)^{2/d}(\log\log n)^{1-2/d}$.
+The logarithmic correction comes from a marginal Green sum and a discrete
+logarithmic supersolution. Positive association controls the boundary
+conditions needed for the supersolution comparison. We also prove that a
+negative tail of order $\exp(-t^\gamma)$, $0<\gamma<1$, together with an
+exponential positive tail, gives expected odometer of order
+$(\log n)^{1/\gamma}$ without an absolute exponential moment.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+Let $d\ge5$ be an integer. For $x,y\in\Z^d$, write $y\sim x$ when $x$ and
+$y$ are nearest neighbors. For $f:\Z^d\to\mathbb R$, let
+\[
+ Pf(x)=\frac1{2d}\sum_{y\sim x}f(y).
+\]
+Let $\eta=(\eta(x))_{x\in\Z^d}$ be independent identically distributed
+real random variables, called the scenery. For $r\in\mathbb R$, put
+$r_+=\max\{r,0\}$ and $r_-=\max\{-r,0\}$. The odometer considered here is
+the field defined by
+\begin{equation}\label{eq:recursion}
+ u_0(x)=0,\qquad u_{n+1}(x)=(\eta(x)+Pu_n(x))_+,
+ \qquad n\ge0.
+\end{equation}
+All expectations and probabilities refer to the scenery unless otherwise
+specified. We write $M_n=\E u_n(0)$.
+
+The divisible sandpile is introduced by Levine and Peres~\cite{LP}.
+For the synchronous process, Bou-Rabee and
+Panagiotis~\cite[Theorem~1.3(iii)(b), p.~6]{BP} give
+\begin{equation}\label{eq:noncritical}
+ M_n\asymp(\log n)^{1/\min\{\gamma,d/2\}}
+\end{equation}
+when the scenery is centered, has positive finite variance and an absolute
+exponential moment, and
+$-\log\Pp(\eta(0)\le-t)\asymp t^\gamma$, with
+$\gamma\in[1,\infty)\setminus\{d/2\}$.
+Their parking paper~\cite[Theorem~3.4, p.~14]{Parking} uses
+\eqref{eq:recursion} and states the general
+high-dimensional bounds
+$c(\log n)^{2/d}\le M_n\le C\log(n+1)$ under the same moment assumptions.
+In the notation of~\cite{BP}, the initial mass is
+$\sigma=1+2d\zeta$ and the odometer records mass emitted to each neighbor;
+setting $\eta=\zeta$ gives exactly \eqref{eq:recursion}, by its
+Lemma~2.1, p.~15. The case $\gamma=d/2$ is the endpoint excluded in
+\cite[Theorem~1.3(iii)(b)]{BP}.
+
+Throughout, $a_n\asymp b_n$ means $cb_n\le a_n\le Cb_n$ for all large
+$n$, with $c,C>0$. Constants may depend on $d$ and the one-site law and
+its stated bounds, but not on time or truncation parameters.
+All logarithms are natural; $|x|$ is Euclidean norm.
+
+\begin{samepage}
+\begin{theorem}\label{thm:main}
+Suppose that $\E\eta(0)=0$, $0<\Var(\eta(0))<\infty$, and
+$\E e^{\theta|\eta(0)|}<\infty$ for some $\theta>0$.
+Put $p=d/2$. Assume that there are $c_0,C_0,t_0>0$ such that
+\begin{equation}\label{eq:criticaltail}
+ e^{-C_0t^p}\le\Pp(\eta(0)<-t)\le e^{-c_0t^p},
+ \qquad t\ge t_0.
+\end{equation}
+Then
+\begin{equation}\label{eq:main}
+ M_n\asymp(\log n)^{2/d}(\log\log n)^{1-2/d}.
+\end{equation}
+\end{theorem}
+\end{samepage}
+
+\begin{theorem}\label{thm:heavy}
+Suppose that the scenery is centered and nondegenerate. Let $0<\gamma<1$,
+and assume that, for some positive $c,C,t_0$ and all $t\ge t_0$,
+\begin{equation}\label{eq:heavytail}
+ e^{-Ct^\gamma}\le\Pp(\eta(0)<-t)\le C e^{-ct^\gamma},
+ \qquad \Pp(\eta(0)>t)\le C e^{-ct}.
+\end{equation}
+Then $M_n\asymp(\log n)^{1/\gamma}$.
+\end{theorem}
+
+No continuity assumption is imposed on the law. Strict and nonstrict
+lower-tail events give equivalent hypotheses up to constants. Indeed,
+\[
+ \Pp(\eta(0)<-t)\le\Pp(\eta(0)\le-t)
+ \le\Pp(\eta(0)<-t/2),
+\]
+and the converse comparison uses
+$\Pp(\eta(0)\le-2t)\le\Pp(\eta(0)<-t)$.
+Thus atoms do not affect either theorem.
+
+The proof of \cref{thm:main} uses the cost scale
+\begin{equation}\label{eq:phi}
+ \Phi(s)=\frac{(1+s)^p}{[\log(e+s)]^{p-1}},\qquad s\ge0.
+\end{equation}
+The critical sum of the $d/(d-2)$ power of the Green function grows
+logarithmically in radius. Splitting the Laplace transform where its
+weighted parameter is of order one gives lower-tail cost $\Phi$ for
+finite Green averages. Smoothing transfers this estimate to reflected
+updates of \eqref{eq:recursion}. For the reverse bound, a negative scenery
+profile proportional to $(1+|x|^2)^{-1}$ admits the exact discrete
+supersolution $a\log(1+|x|^2)$. Its boundary conditions have a controlled
+probability by positive association. These two estimates bound the mean
+increment between exponentials with exponent proportional to $\Phi(M_n)$;
+inverting at level $\log n$ gives \eqref{eq:main}.
+
+Here cost refers to logarithmic probability bounds up to constants for
+the reflected-update event at the deterministic mean $M_n$, and to the
+comparison variational problem in \cref{prop:variational}. The event
+statement is \cref{cor:event}. These statements do not specify a rate
+function or a leading constant.
+
+\section{Preliminaries}
+
+\subsection{Green function estimates}
+Let $(X_j)_{j\ge0}$ be simple random walk with transition operator $P$.
+Write $p_j(x,y)=P^j(x,y)$ and
+\[
+ g_k(x,y)=\sum_{j=0}^{k-1}p_j(x,y),\qquad
+ G(x,y)=\sum_{j=0}^\infty p_j(x,y).
+\]
+The Green function is finite in the dimensions considered here. Set
+\[
+ q=\frac{p}{p-1}=\frac d{d-2}\in(1,2).
+\]
+The local central limit theorem and Green asymptotic used below are those
+of Lawler and Limic~\cite[Theorems~2.1.3 and~4.3.1]{LL}.
+
+\begin{lemma}\label{lem:green}
+There are $c,C>0$ such that
+\begin{align}
+ c(1+|y|)^{2-d}&\le G(0,y)\le C(1+|y|)^{2-d},\label{eq:green}\\
+ \sum_{|y|\le R}G(0,y)^q&\asymp\log(2+R),\qquad R\ge1,\label{eq:logsum}\\
+ \sum_{|y|>R}G(0,y)^2&\le CR^{4-d},\qquad R\ge1.\label{eq:squares}
+\end{align}
+For $k\ge1$, let $H_k(y)=\sum_{j\ge k}p_j(0,y)$. Then
+\begin{equation}\label{eq:timegreen}
+ \|H_k\|_\infty\le Ck^{-(d-2)/2},\qquad
+ \|H_k\|_2^2\le Ck^{-(d-4)/2}.
+\end{equation}
+Here $\|h\|_\infty=\sup_y|h(y)|$ and $\|h\|_2^2=\sum_y|h(y)|^2$.
+\end{lemma}
+
+\begin{proof}
+The Gaussian heat-kernel upper bound is
+$p_j(0,y)\le Cj^{-d/2}\exp(-c|y|^2/j)$ for $j\ge1$.
+Summing it gives the upper bound in \eqref{eq:green}. For large $|y|$,
+the local central limit lower bound on admissible-parity times in
+$[|y|^2,2|y|^2]$ gives the reverse bound. Finitely many remaining sites
+are covered by changing $c$.
+
+More precisely, the parity factor two in the local central limit theorem
+cancels the density one half of admissible times. Summation on the time
+scale $|y|^2$ therefore gives
+\[
+ G(0,y)\sim a_d|y|^{2-d},\qquad
+ a_d=\frac{d\,\Gamma(d/2-1)}{2\pi^{d/2}}
+     =\frac{2d}{(d-2)|S^{d-1}|},
+\]
+where $\Gamma$ is the gamma function and $|S^{d-1}|$ is the surface area
+of the unit sphere in $\mathbb R^d$.
+The coefficient follows by substituting $v=d/(2t)$ in the integral
+$\int_0^\infty(d/(2\pi t))^{d/2}e^{-d/(2t)}\dd t$.
+The Gaussian bound controls the small and large rescaled times, so this
+Riemann-sum passage is justified.
+
+Since $(d-2)q=d$, counting lattice sites in dyadic annuli proves
+\eqref{eq:logsum}. The same count applied to the square of
+\eqref{eq:green} gives the convergent radial tail
+$\sum_{r>R}r^{3-d}\le CR^{4-d}$. In particular $G(0,\cdot)\in\ell^2(\Z^d)$.
+Finally the heat-kernel supremum gives
+$\|H_k\|_\infty\le C\sum_{j\ge k}j^{-d/2}$.
+Symmetry, convolution and nonnegativity give
+\[
+ \sum_yH_k(y)^2
+ =\sum_{i,j\ge k}p_{i+j}(0,0)
+ \le C\sum_{r\ge2k}(r-2k+1)r^{-d/2}
+ \le Ck^{2-d/2}.
+\]
+This proves \eqref{eq:timegreen}.
+\end{proof}
+
+\subsection{The recursion and stopping representation}
+For a fixed scenery field, let $\E_x^X$ denote expectation for the walk
+started at $x$, holding the scenery fixed. Dynamic programming gives
+\begin{equation}\label{eq:stopping}
+ u_n(x)=\sup_{\tau\le n}\E_x^X\sum_{j=0}^{\tau-1}\eta(X_j),
+\end{equation}
+where $\tau$ ranges over stopping times of the natural walk filtration.
+The empty sum for $\tau=0$ is zero. Indeed, stopping immediately gives
+zero, whereas continuing one step gives $\eta(x)+Pu_{n-1}(x)$;
+induction proves \eqref{eq:stopping}. This is
+\cite[Theorem~2.2, p.~15]{BP}. Its finite-horizon form needs no moment or
+regularity assumption on deterministic real scenery.
+
+The map from scenery to $u_n(x)$ is increasing in each coordinate.
+Iteration and the Lipschitz property of the positive-part map give
+\begin{equation}\label{eq:lipschitz}
+ |u_n(x;\eta)-u_n(x;\widetilde\eta)|
+ \le\sum_y g_n(x,y)|\eta(y)-\widetilde\eta(y)|.
+\end{equation}
+Every function on the left depends on finitely many coordinates.
+Monotone iteration also gives $u_{n+1}\ge u_n\ge0$ and
+$u_n\le\sum_{j<n}P^j\eta_+$. Thus $M_n$ is finite whenever
+$\E|\eta(0)|<\infty$.
+
+Define the unreflected update at the origin by
+$A_n=\eta(0)+Pu_n(0)$, and write $\Delta M_n=M_{n+1}-M_n$.
+Centering and stationarity imply $\E A_n=M_n$ and
+\begin{equation}\label{eq:increment}
+ \Delta M_n=\E(-A_n)_+
+ =\int_{M_n}^\infty\Pp(A_n-M_n<-h)\dd h.
+\end{equation}
+Moreover, with $B=\E\eta(0)_-$,
+\begin{equation}\label{eq:boundedinc}
+ 0\le\Delta M_n\le B.
+\end{equation}
+The increments decrease, since $A_n$ increases pointwise. Consequently
+$\Delta M_n\le M_n/n$ for $n\ge1$. These are
+\cite[Lemma~2.4, p.~16, and (86)--(87), p.~51]{BP}.
+By \eqref{eq:lipschitz}, the coordinate constants of $A_n$ are
+$g_{n+1}(0,y)\le G(0,y)$.
+
+\subsection{Concentration and the companion estimates}
+We recall the exponential-moment concentration bound in
+\cite[Lemma~3.2(b), pp.~21--22]{BP}, with a proof for use below.
+A function $F$ has coordinate constants $(\ell_i)$ if changing its
+$i$th real input from $r$ to $r'$ changes $F$ by at most $\ell_i|r-r'|$.
+
+\begin{lemma}\label{lem:bernstein}
+Suppose $F$ depends on finitely many independent copies of a variable
+$\xi$ with $\E e^{\theta|\xi|}<\infty$ for some $\theta>0$. If $F$ has
+coordinate constants $(\ell_i)$, then, for $s\ge0$,
+\begin{equation}\label{eq:bernstein}
+ \Pp(|F-\E F|>s)\le C\exp\left[-c\min\left\{
+ \frac{s^2}{\sum_i\ell_i^2},\frac{s}{\max_i\ell_i}\right\}\right].
+\end{equation}
+The constants depend only on the exponential-moment data. A function
+with all coordinate constants zero is interpreted separately as constant.
+\end{lemma}
+
+\begin{proof}
+Expose the inputs in order and let $D_i$ be the Doob martingale
+differences, with preceding sigma field $\mathcal F_{i-1}$.
+Conditionally on earlier inputs, $D_i=h_i(\xi_i)-\E h_i(\xi_i)$ for an
+$\ell_i$-Lipschitz function $h_i$ obtained by averaging later inputs.
+In particular
+$|D_i|\le\ell_i(|\xi_i|+\E|\xi|)$.
+The exponential moment implies, for integers $r\ge2$,
+\[
+ \E(|D_i|^r\mid\mathcal F_{i-1})\le r!C^r\ell_i^r.
+\]
+Expanding the exponential and using conditional mean zero yields
+\[
+ \E(e^{\lambda D_i}\mid\mathcal F_{i-1})
+ \le \exp(C\lambda^2\ell_i^2)
+ \quad\text{if }|\lambda|\max_i\ell_i\le c.
+\]
+Iterate and choose $\lambda$ a small constant times
+$\min\{s/\sum_i\ell_i^2,1/\max_i\ell_i\}$, for each sign.
+\end{proof}
+
+For clarity, the high-dimensional results of~\cite{BP} entering the
+comparison with \eqref{eq:noncritical} have the following hypotheses and
+conclusions. Throughout this paragraph, the scenery is i.i.d., centered,
+and has positive finite variance, except where weaker assumptions are
+specified. Assumption~(85), p.~51, is
+$\E e^{\theta_0|\eta(0)|}\le K_0$ for some $\theta_0>0$ and $K_0<\infty$.
+
+Theorem~6.1, pp.~51--52, gives
+$M_n\ge c(\log n)^{2/d}$ and
+$\Pp(|u_n(x)-M_n|\ge s)\le C e^{-c\min\{s^2,s\}}$.
+Its constants and large-time threshold are uniform for fixed
+$d,\nu_0,\theta_0,K_0$ when $\Var(\eta(0))\ge\nu_0^2>0$.
+Its proof gives the increment bound (90),
+$\Delta M_n\ge c e^{-C(M_n+1)^{d/2}}$.
+Corollary~6.2, pp.~52--53, retains the mean lower bound for every
+integrable, centered, nondegenerate i.i.d. law, without an exponential
+moment. For a fixed lower-tail condition
+$\Pp(\eta(0)\le-a)\ge q_0>0$, its constants depend only on $d,a,q_0$.
+Under (85), Proposition~6.3, p.~53, assumes (91),
+$\Pp(\eta(0)\le-s)\ge a_0e^{-A_0s^\gamma}$ for $s\ge s_0$ and
+$\gamma>0$, and gives
+$M_n\ge c(\log n)^{1/\min\{\gamma,d/2\}}$.
+
+Lemma~6.4, pp.~53--54, assumes (85) and (92),
+$\Pp(\eta(0)\le-s)\le C_1e^{-c_1s^\gamma}$ for $s\ge s_0$, with
+$\gamma\ge1$ and $\gamma\ne d/2$. It bounds the lower tail of
+$\sum_y g_k(0,y)\eta(y)$ by
+$Ce^{-cs^{\min\{\gamma,d/2\}}}$, uniformly for $k\ge1$ and $s\ge1$.
+At $\gamma=d/2$, its spatial sum is \eqref{eq:logsum}.
+Lemma~6.5, p.~54, uses (85) and bounds
+$P^k(u_j-M_j)(0)$ by the estimate proved in \cref{lem:smoothing} below;
+there is no tail-exponent restriction in that lemma.
+Theorem~6.6, pp.~55--56, assumes (85) and the same upper-tail hypothesis
+as Lemma~6.4, and gives the upper bound in \eqref{eq:noncritical}.
+Its proof uses (93) for the Green average, (94)--(95) for a crude mean
+bound and point concentration, and (96)--(98) for the reflected increment
+and the time window. The arguments below retain the logarithm in the
+Green estimate and use the same decomposition, with all estimates
+derived directly.
+
+\subsection{Positive association}
+We use the product-measure Harris--FKG inequality
+\cite{Harris}, \cite[Proposition~1, p.~91]{FKG}: for finitely many
+decreasing events $E_1,\ldots,E_N$
+depending on finitely many independent real coordinates,
+\begin{equation}\label{eq:association}
+ \Pp\left(\bigcap_{i=1}^N E_i\right)\ge\prod_{i=1}^N\Pp(E_i).
+\end{equation}
+The form for real coordinates follows directly from the one-coordinate
+identity
+\[
+ \operatorname{Cov}(f(\xi),g(\xi))
+ =\tfrac12\E[(f(\xi)-f(\xi'))(g(\xi)-g(\xi'))]\ge0,
+\]
+where $\xi'$ is an independent copy and $f,g$ are decreasing bounded
+functions. Induction over coordinates, conditioning on the last one,
+proves nonnegative covariance for product measures. Applying this to
+indicators and then iterating proves \eqref{eq:association}.
+It does not require independence among the events themselves.
+
+\section{The upper bound}
+
+In this section the assumptions of \cref{thm:main} hold.
+We begin with the critical replacement for the finite Green-average
+estimate.
+
+\begin{lemma}\label{lem:laplace}
+Let $K_k(\lambda)=\log\E\exp(-\lambda\sum_y g_k(0,y)\eta(y))$.
+Uniformly in $k\ge1$,
+\begin{equation}\label{eq:laplace}
+ K_k(\lambda)\le
+ \begin{cases}
+ C\lambda^2,&0\le\lambda\le1,\\
+ C\lambda^q\log(e+\lambda),&\lambda\ge1.
+ \end{cases}
+\end{equation}
+Consequently, for all $k\ge1$ and $s\ge1$,
+\begin{equation}\label{eq:greenprob}
+ \Pp\left(\sum_y g_k(0,y)\eta(y)\le-s\right)
+ \le Ce^{-c\Phi(s)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $H(t)=\log\E e^{-t\eta(0)}$ for $t\ge0$.
+The negative-tail upper bound implies that $H(t)$ is finite for every
+$t\ge0$. Centering and Taylor expansion near zero give $H(t)\le Ct^2$
+there. Enlarging $C$ on compact intervals extends this inequality to
+$0\le t\le T$ for any fixed $T<\infty$.
+For $t\ge1$, integrate the tail of $\eta(0)_-$ and use
+\[
+ tr\le\tfrac12c_0r^p+C t^q.
+\]
+The part with bounded $r$ and the polynomial prefactor from integration
+are absorbed into $Ct^q$. Positive scenery contributes at most one to
+the unlogged transform. Hence
+\begin{equation}\label{eq:onesitemgf}
+ H(t)\le Ct^2\quad(0\le t\le1),\qquad
+ H(t)\le Ct^q\quad(t\ge1).
+\end{equation}
+The large-parameter estimate requires only the negative-tail upper
+bound; a positive-tail moment of order $p$ is not needed.
+
+For $\lambda\ge1$, choose the crossover radius
+\begin{equation}\label{eq:crossover}
+ R=C_1\lambda^{1/(d-2)},
+\end{equation}
+where $C_1$ is large enough that $\lambda G(0,y)\le1$ for $|y|>R$.
+Independence, $g_k\le G$, and \eqref{eq:onesitemgf} imply
+\begin{align*}
+ K_k(\lambda)
+ &\le C\lambda^q\sum_{|y|\le R}G(0,y)^q
+       +C\lambda^2\sum_{|y|>R}G(0,y)^2\\
+ &\le C\lambda^q\log(2+R)+C\lambda^2R^{4-d}
+ \le C\lambda^q\log(e+\lambda).
+\end{align*}
+On the inner region this remains valid when $\lambda g_k(0,y)<1$,
+because $q<2$ and $t^2\le t^q$ for $0\le t\le1$.
+The outer power is $2+(4-d)/(d-2)=q$.
+For $0\le\lambda\le1$, the compact-interval bound for $H$ on
+$[0,\sup_yG(0,y)]$ and square summability give $K_k(\lambda)\le C\lambda^2$.
+This proves the claimed uniformity over the entire parameter range.
+
+For large $s$, set
+\begin{equation}\label{eq:lambdaopt}
+ \lambda=b\left(\frac{s}{\log(e+s)}\right)^{p-1}.
+\end{equation}
+Chernoff's inequality and \eqref{eq:laplace} give exponent at most
+\[
+ -\frac{b s^p}{[\log(e+s)]^{p-1}}
+ +\frac{C b^q s^p}{[\log(e+s)]^{p-1}}.
+\]
+Here $(p-1)q=p$ and $\log(e+\lambda)\le C\log(e+s)$.
+Fixing $b>0$ sufficiently small makes the second term at most half the
+absolute value of the first. A change in the prefactor covers bounded
+$s\ge1$ and gives \eqref{eq:greenprob}.
+\end{proof}
+
+The Legendre transform of the comparison function
+$L(\lambda)=\lambda^q\log(e+\lambda)$ has the same order as $\Phi(s)$
+for large $s$. Indeed, $L$ is strictly convex on $(0,\infty)$, and its
+maximizing parameter satisfies
+\[
+ s=L'(\lambda)\asymp\lambda^{q-1}\log\lambda,
+ \qquad
+ \lambda\asymp\left(\frac{s}{\log s}\right)^{p-1}.
+\]
+At that parameter,
+$\lambda L'(\lambda)-L(\lambda)
+\asymp\lambda^q\log\lambda$.
+Thus the logarithmic power in \eqref{eq:greenprob} is also the one given
+by conjugacy. This calculation concerns $L$, rather than an exact
+logarithmic transform for an arbitrary scenery law.
+
+\begin{lemma}\label{lem:smoothing}
+For all integers $k\ge1$, $j\ge0$, and $s\ge1$,
+\begin{equation}\label{eq:smoothing}
+ \Pp\big(P^k(u_j-M_j)(0)\le-s\big)
+ \le C\exp\left[-c\min\{s^2k^{(d-4)/2},s k^{(d-2)/2}\}\right].
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The coordinate constants of $P^ku_j(0)$ are bounded by
+\[
+ \sum_zp_k(0,z)g_j(z,y)
+ =\sum_{r=0}^{j-1}p_{k+r}(0,y)\le H_k(y).
+\]
+Stationarity gives $\E P^ku_j(0)=M_j$. Apply \cref{lem:bernstein} and
+\eqref{eq:timegreen}. The case $j=0$ is deterministic.
+\end{proof}
+
+\begin{proposition}\label{prop:upperincrement}
+There are $c,C>0$ such that, for every $n\ge0$,
+\begin{equation}\label{eq:upperincrement}
+ \Delta M_n\le Ce^{-c\Phi(M_n)}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+First, \cref{lem:bernstein}, applied with the coordinate constants of
+$A_n$, gives uniformly in $n$ and $h\ge0$
+\begin{equation}\label{eq:crudeconcentration}
+ \Pp(A_n-M_n\le-h)\le C e^{-c\min\{h^2,h\}}.
+\end{equation}
+Integrating in \eqref{eq:increment} yields
+$\Delta M_n\le Ce^{-cM_n}$, with constants also covering bounded $M_n$.
+This implies
+\begin{equation}\label{eq:crudemean}
+ M_n\le C\log(n+2).
+\end{equation}
+To see the implication without a continuous-time substitution, define
+$\tau_R=\inf\{j:M_j\ge R\}$. Whenever $\tau_{2R}<\infty$ and $R>2B$,
+\eqref{eq:boundedinc} gives $M_{\tau_R}\le R+B$, so the increase between
+$\tau_R$ and $\tau_{2R}$ is at least $R/2$. Each increment in this
+interval is at most $Ce^{-cR}$. Hence
+$\tau_{2R}-\tau_R\ge cRe^{cR}$. Taking $R=M_n/2$ proves
+\eqref{eq:crudemean}; bounded $M_n$ are harmless.
+
+Fix $0<\varepsilon<1$ with $\varepsilon B\le1/8$. For
+$M_n\le h\le\sqrt n$, put $k=\lfloor\varepsilon h\rfloor$.
+If $M_n$ is large, then $1\le k\le n$ and $k\asymp h$.
+By \eqref{eq:boundedinc}, $M_n-M_{n-k}\le h/8$.
+Iterating $u_{r+1}\ge\eta+Pu_r$ gives
+\begin{equation}\label{eq:decomposition}
+ A_n-M_n\ge\sum_{i=0}^kP^i\eta(0)
+ +P^{k+1}(u_{n-k}-M_{n-k})(0)-h/8.
+\end{equation}
+Thus $A_n-M_n\le-h$ implies that at least one of the two random terms
+on the right is at most $-7h/16$. The first is a Green average of
+truncation time $k+1$ and is bounded by \cref{lem:laplace}.
+For the second, \cref{lem:smoothing} gives $Ce^{-ch^p}$, since
+\[
+ h^2(k+1)^{(d-4)/2}\asymp h^{d/2},\qquad
+ h(k+1)^{(d-2)/2}\asymp h^{d/2}.
+\]
+A union bound therefore proves
+\begin{equation}\label{eq:window}
+ \Pp(A_n-M_n\le-h)\le Ce^{-c\Phi(h)},
+ \qquad M_n\le h\le\sqrt n.
+\end{equation}
+
+For $h>\sqrt n$, integration of \eqref{eq:crudeconcentration} gives
+$Ce^{-c\sqrt n}$. In view of \eqref{eq:crudemean}, this is bounded by
+$Ce^{-c'\Phi(M_n)}$ for all large $n$. Also, $\Phi$ is increasing and
+\begin{equation}\label{eq:phiderivative}
+ \frac{\Phi'(s)}{\Phi(s)}
+ =\frac p{1+s}-\frac{p-1}{(e+s)\log(e+s)},\qquad
+ \Phi'(s)\asymp\left(\frac{s}{\log s}\right)^{p-1}
+\end{equation}
+as $s\to\infty$. In particular $\Phi'(s)\ge1$ for all sufficiently
+large $s$, so
+$\int_{M_n}^\infty e^{-c\Phi(h)}\dd h\le C e^{-c\Phi(M_n)}$
+when $M_n$ is large. Integrate \eqref{eq:window} in
+\eqref{eq:increment} and add the remaining tail. For bounded $M_n$,
+\eqref{eq:boundedinc} completes the proof.
+\end{proof}
+
+\section{The lower bound}
+
+We first record the spatial comparison problem associated with the
+logarithmic cost. It identifies the depth profile used in the dynamical
+argument, while keeping a cost for small shifts.
+
+\begin{proposition}\label{prop:variational}
+Let $w_y=G(0,y)$ and $J(a)=a^2+a^p$ for $a\ge0$. Define
+\[
+ \mathcal I(m)=\inf\left\{\sum_yJ(a_y): a_y\ge0\text{ has finite support},
+                 \ \sum_yw_ya_y\ge m\right\}.
+\]
+Then $\mathcal I(m)\asymp\Phi(m)$ as $m\to\infty$.
+For a finite ball $\{|y|\le R\}$, the pure power problem is exactly
+\begin{equation}\label{eq:holder}
+ \inf_{\substack{a_y\ge0\\\sum_{|y|\le R}w_ya_y\ge m}}
+       \sum_{|y|\le R}a_y^p
+ =\frac{m^p}{S_R^{p-1}},\qquad
+ S_R=\sum_{|y|\le R}w_y^q.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+H\"older's inequality gives \eqref{eq:holder}, with equality at
+$a_y=(m/S_R)w_y^{1/(p-1)}$.
+By \eqref{eq:green} and \eqref{eq:logsum}, these depths have order
+$(m/\log R)(1+|y|)^{-2}$ away from bounded radii.
+
+Let $J^*(t)=\sup_{a\ge0}(ta-J(a))$, $t\ge0$.
+The inequalities $J(a)\ge a^2$ and $J(a)\ge a^p$ give
+$J^*(t)\le Ct^2$ for $t\le1$ and $J^*(t)\le Ct^q$ for $t\ge1$.
+The split at \eqref{eq:crossover} therefore gives
+$\sum_yJ^*(\lambda w_y)\le C\lambda^q\log(e+\lambda)$ for $\lambda\ge1$.
+Fenchel's inequality yields
+\[
+ \sum_yJ(a_y)\ge\lambda m-C\lambda^q\log(e+\lambda).
+\]
+Use \eqref{eq:lambdaopt} with $s=m$ and small fixed $b$ to obtain the
+lower bound for $\mathcal I(m)$.
+
+For the reverse bound, take $A=K m/\log m$ with a sufficiently large
+fixed $K$, and set
+\[
+ a_y=\frac{A}{1+|y|^2}\ind_{\{|y|\le\sqrt A\}}.
+\]
+Annular counting and \eqref{eq:green} give
+$\sum_yw_ya_y\ge cA\log A\ge m$ for large $m$.
+Since $2p=d$, the power cost is at most $CA^p\log A$, while
+\[
+ \sum_ya_y^2
+ \le CA^2\left(1+\int_1^{\sqrt A}r^{d-5}\dd r\right)
+ \le CA^{d/2}=CA^p.
+\]
+This proves the upper bound. The function $J$ is a comparison cost and
+is not identified with the rate function of the scenery law.
+\end{proof}
+
+Sending $R$ to infinity in \eqref{eq:holder} at fixed $m$ does not give a
+probability estimate for the reflected recursion. In the next argument
+the radius is fixed by the desired height, every constrained site has a
+probability cost, and the boundary event is included.
+
+\begin{lemma}\label{lem:barrier}
+The function $f(x)=\log(1+|x|^2)$ satisfies
+\begin{equation}\label{eq:barrier}
+ (P-I)f(x)\le\frac1{1+|x|^2},\qquad x\in\Z^d,
+\end{equation}
+where $I$ is the identity operator.
+\end{lemma}
+
+\begin{proof}
+Put $s=1+|x|^2$. For the $i$th coordinate vector $e_i$,
+\[
+ f(x+e_i)+f(x-e_i)-2f(x)
+ =\log\frac{(s+1)^2-4x_i^2}{s^2}
+ \le2\log(1+1/s).
+\]
+The numerator is the product of $1+|x+e_i|^2$ and $1+|x-e_i|^2$,
+so is positive. Sum over $i$, divide by $2d$, and use
+$\log(1+1/s)\le1/s$.
+\end{proof}
+
+\begin{proposition}\label{prop:lowerincrement}
+Under the assumptions of \cref{thm:main}, there are $c,C>0$ such that
+\begin{equation}\label{eq:lowerincrement}
+ \Delta M_n\ge c e^{-C\Phi(M_n)},\qquad n\ge0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Fix $n$ and write $M=M_n$. There is a unique $a>0$ with
+\begin{equation}\label{eq:achoice}
+ a\log(1+a)=2M+1.
+\end{equation}
+The left side is strictly increasing from zero to infinity, and its
+value at $a=1$ is $\log2<1$. Thus $a>1$ for every $M\ge0$.
+Put $R=\lceil\sqrt a\rceil$, $D=\{x\in\Z^d:|x|<R\}$ and $w=af$.
+Let $\partial^+D=\{z\notin D:z\sim x\text{ for some }x\in D\}$
+be the exterior vertex boundary. Consider
+\begin{equation}\label{eq:holeevent}
+ E_n=\bigcap_{x\in D}\left\{\eta(x)\le-\frac{2a}{1+|x|^2}\right\}
+ \ \cap\bigcap_{z\in\partial^+D}\{u_n(z)\le2M+1\}.
+\end{equation}
+For $z\in\partial^+D$, $|z|\ge R\ge\sqrt a$, so
+$w(z)\ge a\log(1+a)=2M+1$.
+Monotonicity in time gives $u_j(z)\le w(z)$ for every $j\le n$ on $E_n$.
+
+Starting from $u_0=0\le w$, induction proves $u_j\le w$ in $D$ for
+$j\le n$. Indeed, when comparison holds at time $j$ for all neighbors
+of $x\in D$, \cref{lem:barrier} gives
+\[
+ \eta(x)+Pu_j(x)\le w(x)-\frac{a}{1+|x|^2}\le w(x).
+\]
+Taking the positive part preserves the last upper bound since $w\ge0$.
+All neighbors of zero lie in $D$, since $R\ge2$, and hence on $E_n$
+\begin{equation}\label{eq:forcing}
+ A_n\le-2a+a\log2=-(2-\log2)a,\qquad (-A_n)_+\ge a.
+\end{equation}
+
+The negative-tail lower bound extends to all depths in the form
+\begin{equation}\label{eq:alldepths}
+ \Pp(\eta(0)\le-t)\ge e^{-C(1+t^p)},\qquad t\ge0.
+\end{equation}
+For bounded $t$, use the fixed positive probability of lying below one
+fixed level beyond $t_0$; for larger $t$, use \eqref{eq:criticaltail}.
+In particular, small depths still incur a bounded cost per site.
+
+Every event in \eqref{eq:holeevent} is decreasing in the independent
+scenery. The boundary events depend on finitely many coordinates and
+are decreasing by the monotonicity of $u_n$. Moreover, stationarity and
+Markov's inequality give
+\[
+ \Pp(u_n(z)\le2M+1)\ge1-\frac{M}{2M+1}\ge\frac12.
+\]
+Apply \eqref{eq:association} to all conditions in \eqref{eq:holeevent}.
+It follows from \eqref{eq:alldepths} that
+\begin{equation}\label{eq:eventcost}
+ -\log\Pp(E_n)\le
+ C|D|+Ca^p\sum_{x\in D}(1+|x|^2)^{-p}
+       +(\log2)|\partial^+D|.
+\end{equation}
+The boundary odometers need not be independent of the scenery in $D$.
+The association inequality is what justifies this bound.
+
+Since $a>1$, $R\le2\sqrt a$, and
+$|D|+|\partial^+D|\le C(R+1)^d\le Ca^p$.
+Annular counting at $2p=d$ gives
+$\sum_{x\in D}(1+|x|^2)^{-p}\le C\log(2+R)$.
+Consequently
+\begin{equation}\label{eq:probbarrier}
+ \Pp(E_n)\ge e^{-Ca^p\log(e+a)}.
+\end{equation}
+For large $M$, \eqref{eq:achoice} gives
+$a\asymp M/\log M$ and $\log a\asymp\log M$.
+Thus $a^p\log(e+a)\le C\Phi(M)$; this also holds for bounded $M$
+by continuity and positivity of \eqref{eq:phi}.
+Multiply \eqref{eq:probbarrier} by the forced increment in
+\eqref{eq:forcing} and use \eqref{eq:increment} and $a>1$.
+\end{proof}
+
+\begin{corollary}\label{cor:event}
+Under the assumptions of \cref{thm:main}, for all sufficiently large $n$,
+\begin{equation}\label{eq:eventconclusion}
+ e^{-C\Phi(M_n)}\le\Pp(A_n\le-1)\le C e^{-c\Phi(M_n)}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The event in \eqref{eq:holeevent} forces $A_n\le-1$ by
+\eqref{eq:forcing}, giving the lower bound.
+For the upper bound, use \eqref{eq:window} at $h=M_n+1$;
+\eqref{eq:crudemean} ensures $M_n+1\le\sqrt n$ for large $n$.
+Bounded $M_n$ can be covered by increasing the prefactor.
+\end{proof}
+
+\section{Proof of the main theorem}
+
+We give the discrete integration argument in a form that also applies
+to \cref{thm:heavy}.
+
+\begin{lemma}\label{lem:integration}
+Let $(m_n)_{n\ge0}$ be nonnegative and nondecreasing, with $m_0=0$ and
+$m_{n+1}-m_n\le B<\infty$. Suppose $\Psi:[0,\infty)\to(0,\infty)$ is
+continuous and increasing, satisfies $\Psi(s/2)\asymp\Psi(s)$ at
+infinity and $\log(s+2)=O(\Psi(s))$, and
+\begin{equation}\label{eq:twosidedincrements}
+ c e^{-C\Psi(m_n)}\le m_{n+1}-m_n\le C e^{-c\Psi(m_n)}.
+\end{equation}
+Then $m_n\to\infty$ and $\Psi(m_n)\asymp\log n$.
+\end{lemma}
+
+\begin{proof}
+If $m_n$ remained bounded, its increments would have a fixed positive
+lower bound by \eqref{eq:twosidedincrements}, a contradiction.
+Choose $c,C$ from the lower increment bound and set
+\[
+ F(s)=c^{-1}\int_0^s e^{C\Psi(r)}\dd r.
+\]
+Since $F'$ is increasing,
+\[
+ F(m_{n+1})-F(m_n)\ge F'(m_n)(m_{n+1}-m_n)\ge1.
+\]
+Therefore $n\le F(m_n)\le c^{-1}m_n e^{C\Psi(m_n)}$.
+The assumption on $\log(s+2)$ gives
+$\Psi(m_n)\ge c'\log n$ for large $n$.
+
+For the other direction let $\tau_R=\inf\{j:m_j\ge R\}$.
+The bounded increment gives $m_{\tau_R}\le R+B$.
+For $R>2B$, the increase from $\tau_R$ to $\tau_{2R}$ is at least
+$R-B\ge R/2$. Throughout this interval every increment is at most
+$Ce^{-c\Psi(R)}$, whence
+\[
+ \tau_{2R}-\tau_R\ge\frac{R}{2C}e^{c\Psi(R)}.
+\]
+Take the real threshold $R=m_n/2$. Since $\tau_{2R}\le n$,
+$\Psi(m_n/2)\le C'\log n$ for large $n$.
+The doubling assumption gives the required upper bound on $\Psi(m_n)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+The function $\Phi$ in \eqref{eq:phi} is increasing: the expression in
+\eqref{eq:phiderivative} is positive for $s\ge0$.
+It satisfies the hypotheses on $\Psi$ in \cref{lem:integration}.
+Apply that lemma to \cref{prop:upperincrement,prop:lowerincrement} and
+\eqref{eq:boundedinc}. This gives
+\begin{equation}\label{eq:meanphi}
+ \Phi(M_n)\asymp\log n.
+\end{equation}
+For $T\to\infty$, put
+$x_T=T^{1/p}(\log T)^{(p-1)/p}$. Then
+\[
+ \log x_T=\frac1p\log T+\frac{p-1}{p}\log\log T,
+ \qquad
+ \frac{\Phi(x_T)}{T}\longrightarrow p^{p-1}.
+\]
+Since $\Phi$ is increasing and $\Phi(\alpha s)/\Phi(s)\to\alpha^p$
+for each fixed $\alpha>0$, \eqref{eq:meanphi} implies
+$M_n\asymp x_{\log n}$.
+Finally $1/p=2/d$ and $(p-1)/p=1-2/d$, proving \eqref{eq:main}.
+The coefficient in this inversion of $\Phi$ does not determine a
+leading coefficient for $M_n$, because \eqref{eq:meanphi} has unspecified
+comparison constants.
+\end{proof}
+
+\section{The case \texorpdfstring{$0<\gamma<1$}{0 < gamma < 1}}
+
+Assume \eqref{eq:heavytail}. Tail integration gives
+\begin{equation}\label{eq:stretchedmoment}
+ \E e^{b|\eta(0)|^\gamma}<\infty
+\end{equation}
+for some $b>0$, and all ordinary moments are finite. Nondegeneracy
+therefore implies positive finite variance. On the other hand, for every
+$\theta>0$,
+\[
+ \E e^{\theta|\eta(0)|}
+ \ge e^{\theta t}\Pp(\eta(0)<-t)
+ \ge e^{\theta t-Ct^\gamma}\longrightarrow\infty.
+\]
+Thus the absolute exponential-moment assumption of the printed parking
+Theorem~3.4 and companion Theorem~6.6 fails. The standing assumption
+(85) in the companion's Proposition~6.3 fails as well.
+We replace exponential-moment concentration by the following estimate.
+
+\begin{lemma}\label{lem:stretchedconcentration}
+Let $0<\gamma<1$ and let $\xi$ satisfy $\E e^{b|\xi|^\gamma}<\infty$
+for some $b>0$. Suppose $F$ depends on finitely many independent copies
+of $\xi$ and has coordinate constants $\ell_i$ with
+$\sum_i\ell_i^2\le S<\infty$ and $\max_i\ell_i\le L<\infty$.
+For fixed positive $S,L$, there are $c,C>0$, independent of the number
+of coordinates, such that
+\begin{equation}\label{eq:stretchedconcentration}
+ \Pp(|F-\E F|>s)\le Ce^{-cs^\gamma},\qquad s\ge1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $D_i$ be the Doob differences obtained by exposing the inputs, and
+discard zero coordinate constants. As in the proof of
+\cref{lem:bernstein}, conditionally on $\mathcal F_{i-1}$,
+$D_i$ is a centered $\ell_i$-Lipschitz function of a fresh input, so
+$|D_i|\le\ell_i(|\xi_i|+\E|\xi|)$.
+Using $(a+b)^\gamma\le a^\gamma+b^\gamma$ for $a,b\ge0$, choose
+$b_1,K>0$ such that
+\begin{equation}\label{eq:conditionalstretch}
+ \E\left[\exp\{b_1(|D_i|/\ell_i)^\gamma\}
+       \mid\mathcal F_{i-1}\right]\le K.
+\end{equation}
+These are deterministic constants, uniform in $i$ and the earlier inputs.
+
+Fix $s\ge1$ and choose $b_2>0$ small enough that
+$b_2 L^\gamma\le b_1/2$. Set $\lambda=b_2s^{\gamma-1}$.
+On $|D_i|\le s$,
+\[
+ \lambda|D_i|\le b_2|D_i|^\gamma
+ \le\tfrac12 b_1(|D_i|/\ell_i)^\gamma.
+\]
+The boundedness of $z^2e^{-(b_1/2)z^\gamma}$ and
+\eqref{eq:conditionalstretch} imply
+\begin{equation}\label{eq:truncatedsecond}
+ \E[D_i^2e^{\lambda|D_i|}\ind_{\{|D_i|\le s\}}
+            \mid\mathcal F_{i-1}]\le C\ell_i^2.
+\end{equation}
+The same moment bound gives
+\begin{align*}
+ \Pp(|D_i|>s\mid\mathcal F_{i-1})
+   &\le K e^{-b_1(s/\ell_i)^\gamma},\\
+ \E[|D_i|\ind_{\{|D_i|>s\}}\mid\mathcal F_{i-1}]
+   &\le T_i:=C\ell_i e^{-b_3(s/\ell_i)^\gamma}
+\end{align*}
+for a fixed $b_3>0$. The second inequality follows by integrating the
+first and absorbing a polynomial factor into a smaller exponential
+constant.
+
+Both discarded quantities have summable deterministic bounds:
+\begin{equation}\label{eq:discarded}
+ \sum_iK e^{-b_1(s/\ell_i)^\gamma}\le CS e^{-cs^\gamma},
+ \qquad \sum_iT_i\le CS e^{-cs^\gamma}.
+\end{equation}
+Indeed, split an exponential into two equal factors. Since $\ell_i\le L$,
+one factor is at most $e^{-c s^\gamma/L^\gamma}$. Since $s\ge1$, the
+other is bounded by $C\ell_i^2$. For the first-moment bound use
+$\ell_i e^{-c/\ell_i^\gamma}\le C\ell_i^2$ instead. The constants
+depend on $L$, but not on the number of coordinates.
+
+The elementary inequality $e^z\le1+z+z^2e^{|z|}/2$, conditional mean
+zero, and \eqref{eq:truncatedsecond} give
+\[
+ \E[e^{\lambda D_i}\ind_{\{|D_i|\le s\}}
+           \mid\mathcal F_{i-1}]
+ \le\exp(\lambda T_i+C\lambda^2\ell_i^2).
+\]
+Iterating while retaining the truncation indicators, and adding the
+probability that any difference is discarded, yields
+\begin{align*}
+ \Pp\left(\sum_iD_i>s\right)
+ &\le CS e^{-cs^\gamma}
+  +\exp\left[-\lambda s+C\lambda^2S+\lambda CS e^{-cs^\gamma}\right]\\
+ &\le C'e^{-c's^\gamma}.
+\end{align*}
+Here $\lambda s=b_2s^\gamma$ and $\lambda\le b_2$, so the positive
+terms in the last exponent are bounded uniformly for $s\ge1$.
+Apply the argument to $-F$ for the other tail.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:heavy}]
+The identities \eqref{eq:increment}--\eqref{eq:boundedinc} and the
+coordinate estimate \eqref{eq:lipschitz} use only integrability.
+For $A_n$, its coordinate constants are bounded by $G(0,y)$, so
+\cref{lem:stretchedconcentration} applies with fixed
+$S=\sum_yG(0,y)^2$ and $L=\sup_yG(0,y)$.
+Integration in \eqref{eq:increment} gives
+\begin{equation}\label{eq:heavyupper}
+ \Delta M_n\le C e^{-c(1+M_n)^\gamma}.
+\end{equation}
+For large $M_n$, the tail integral has a polynomial factor of order at
+most $(1+M_n)^{1-\gamma}$; reducing $c$ absorbs it. Bounded $M_n$ are
+covered by \eqref{eq:boundedinc}.
+
+For a lower bound set $H=4d(M_n+1)$. Stationarity, Markov's inequality
+and a union bound give
+\[
+ \Pp(u_n(e)\le H\text{ for all }e\sim0)
+ \ge1-\frac{2dM_n}{H}\ge\frac12.
+\]
+This event and $\{\eta(0)\le-H-1\}$ are decreasing. By
+\eqref{eq:association} their intersection has probability at least half
+the latter event's probability. On the intersection $Pu_n(0)\le H$ and
+$A_n\le-1$. Extending the tail lower bound to bounded depths as in
+\eqref{eq:alldepths} gives
+\begin{equation}\label{eq:heavylower}
+ \Delta M_n\ge c e^{-C(1+M_n)^\gamma}.
+\end{equation}
+Apply \cref{lem:integration} with $\Psi(s)=(1+s)^\gamma$ to
+\eqref{eq:heavyupper}, \eqref{eq:heavylower} and
+\eqref{eq:boundedinc}. It follows that
+$(1+M_n)^\gamma\asymp\log n$, as required.
+\end{proof}
+
+For comparison, if finitely many positive weights have maximum $w_*$,
+subadditivity gives
+\[
+ \left(\sum_yw_ya_y\right)^\gamma
+ \le w_*^\gamma\sum_ya_y^\gamma,\qquad a_y\ge0.
+\]
+The minimum of $\sum_ya_y^\gamma$ subject to
+$\sum_yw_ya_y\ge m$ is therefore $(m/w_*)^\gamma$, attained by placing
+the entire depth at a site of maximal weight. This finite variational
+identity explains why splitting the depth does not produce the
+logarithmic gain of the convex critical case. The proof of the odometer
+bound is the concentration and reflected-update argument above.
+
+\section{Remarks and open problems}
+
+\subsection{A leading constant}
+The two-sided hypothesis \eqref{eq:criticaltail} specifies only a tail
+order. Under a sharper assumption such as
+$-\log\Pp(\eta(0)<-t)\sim\kappa t^p$ with $\kappa>0$, one may ask
+whether the ratio of $M_n$ to
+$(\log n)^{1/p}(\log\log n)^{(p-1)/p}$ converges, and how its limit
+depends on the law. The barrier and concentration comparisons here
+retain constants at several stages, including the passage from a Green
+average to a reflected update, so they do not determine such a limit.
+
+\subsection{A large-deviation principle}
+\Cref{cor:event} determines the order of the negative logarithm of one
+reflected-update probability at $M_n$. A large-deviation principle would
+require a specified family of random objects and matching upper and
+lower bounds with a common rate function. The comparison functional
+$\mathcal I$ does not provide that identification. In particular,
+\eqref{eq:greenprob} is only an upper bound uniform in truncation time.
+A matching logarithmic lower estimate cannot hold uniformly down to
+$k=1$: then $g_1(0,y)=\ind_{\{y=0\}}$ and the negative logarithm of
+the lower-tail probability has order $s^p$, rather than $\Phi(s)$.
+
+\subsection{Dimensions three and four}
+The proof uses $G(0,\cdot)\in\ell^2$, and the decay of the squared norm
+of its time tail. Both properties fail in dimensions three and four.
+At $d=4$, also $p=q=2$, so the strict inequality $q<2$ used in the
+Laplace split is absent. The lower-dimensional mean orders under an
+absolute exponential moment are those stated in the cited papers:
+$n^{1/4}$ in dimension three and $\log n$ in dimension four.
+How heavier negative tails interact with those accumulating
+fluctuations, and what replaces the reflected-event cost in that
+setting, remain questions beyond the estimates here.
+
+\clearpage
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25). Computational resources were
+provided in part by Google Cloud through its education credits program
+(credit 530550103).
+
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results, coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework repository~\cite{BrainFramework}.
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+OpenAI GPT-6.1 (Codex) wrote the proofs, and an independent GPT-6.1 run
+checked them. Claude Opus 5.5 (Anthropic) set the problem, compared the
+sources and prepared the text. The author is responsible for the content.
+
+\section*{Data availability}
+No data were generated or analysed for this paper. Related material is at
+\url{https://github.com/yspennstate/divisible-sandpile-critical-tail}.
+
+The paper is part of the Math Brain project, whose public repository is \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{BP} A.~Bou-Rabee and C.~Panagiotis,
+\emph{Quantitative explosion and percolation of the divisible sandpile},
+arXiv:2609.02829v1 [math.PR], 2 September 2026,
+\url{https://doi.org/10.48550/arXiv.2609.02829}.
+
+\bibitem{Parking} A.~Bou-Rabee and C.~Panagiotis,
+\emph{Sharpness and critical scaling of parking},
+arXiv:2609.02820v1 [math.PR], 2 September 2026,
+\url{https://doi.org/10.48550/arXiv.2609.02820}.
+
+\bibitem{FKG} C.~M.~Fortuin, P.~W.~Kasteleyn and J.~Ginibre,
+\emph{Correlation inequalities on some partially ordered sets},
+Comm.\ Math.\ Phys.\ 22 (1971), 89--103,
+\url{https://doi.org/10.1007/BF01651330}.
+
+\bibitem{Harris} T.~E.~Harris,
+\emph{A lower bound for the critical probability in a certain percolation process},
+Proc.\ Cambridge Philos.\ Soc.\ 56 (1960), 13--20,
+\url{https://doi.org/10.1017/S0305004100034241}.
+
+\bibitem{LL} G.~F.~Lawler and V.~Limic,
+\emph{Random Walk: A Modern Introduction},
+Cambridge Studies in Advanced Mathematics, vol.~123,
+Cambridge University Press, Cambridge, 2010,
+\url{https://doi.org/10.1017/CBO9780511750854}.
+
+\bibitem{LP} L.~Levine and Y.~Peres,
+\emph{Strong spherical asymptotics for rotor-router aggregation and the divisible sandpile},
+Potential Anal.\ 30 (2009), 1--27,
+\url{https://doi.org/10.1007/s11118-008-9104-6}.
+
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026, \url{https://github.com/yspennstate/math-brain-public}.
+
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public}.
+
+\end{thebibliography}
+\end{document}
