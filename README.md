@@ -25,4 +25,4 @@ The paper is part of the Math Brain project: https://github.com/yspennstate/math
 ## Files
 
 - `main.tex`: LaTeX source (amsart)
-- `main.pdf`: compiled paper, 12 pages
+- `main.pdf`: compiled paper, 14 pages
