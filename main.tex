@@ -133,14 +133,17 @@ The proof of \cref{thm:main} uses the cost scale
 \begin{equation}\label{eq:phi}
  \Phi(s)=\frac{(1+s)^p}{[\log(e+s)]^{p-1}},\qquad s\ge0.
 \end{equation}
-The critical sum of the $d/(d-2)$ power of the Green function grows
+By the Green function asymptotics of Lawler and Limic~\cite{LL}, the
+critical sum of the $d/(d-2)$ power of the Green function grows
 logarithmically in radius. Splitting the Laplace transform where its
 weighted parameter is of order one gives lower-tail cost $\Phi$ for
 finite Green averages. Smoothing transfers this estimate to reflected
 updates of \eqref{eq:recursion}. For the reverse bound, a negative scenery
 profile proportional to $(1+|x|^2)^{-1}$ admits the exact discrete
 supersolution $a\log(1+|x|^2)$. Its boundary conditions have a controlled
-probability by positive association. These two estimates bound the mean
+probability by positive association, the inequality of
+Harris~\cite{Harris} and of Fortuin, Kasteleyn and Ginibre~\cite{FKG}.
+These two estimates bound the mean
 increment between exponentials with exponent proportional to $\Phi(M_n)$;
 inverting at level $\log n$ gives \eqref{eq:main}.
 
@@ -986,6 +989,21 @@ in the funding declaration above.
 OpenAI GPT-6.1 (Codex) wrote the proofs, and an independent GPT-6.1 run
 checked them. Claude Opus 5.5 (Anthropic) set the problem, compared the
 sources and prepared the text. The author is responsible for the content.
+The results rest on the work of others. The question is the endpoint
+$\gamma=d/2$ excluded from Theorem~1.3(iii)(b) of Bou-Rabee and
+Panagiotis~\cite{BP}, whose stopping-time representation, increment
+identities and concentration bound (their Theorem~2.2, Lemma~2.4 and
+Lemma~3.2(b)) are used throughout. The divisible sandpile was introduced by
+Levine and Peres~\cite{LP}; the Green function estimates are those of Lawler
+and Limic~\cite{LL}, and positive association is the inequality of
+Harris~\cite{Harris} and of Fortuin, Kasteleyn and Ginibre~\cite{FKG}.
+These results are theirs. The new steps are the marginal Green sum of
+Lemma~\ref{lem:green}, the increment bounds of
+Propositions~\ref{prop:upperincrement} and~\ref{prop:lowerincrement}, the
+variational estimate of Proposition~\ref{prop:variational}, the logarithmic
+supersolution of Lemma~\ref{lem:barrier} and the concentration bound of
+Lemma~\ref{lem:stretchedconcentration}, which together give
+Theorems~\ref{thm:main} and~\ref{thm:heavy}.
 
 \section*{Data availability}
 No data were generated or analysed for this paper. Related material is at
